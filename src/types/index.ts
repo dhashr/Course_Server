@@ -4,10 +4,9 @@ import { Types, Model, Document } from 'mongoose';
 //enum for UserRole
 export enum UserRole {
     Admin = "Admin",
-    Receptionist = "Receptionist",
-    Pathologist = "Pathologist",
-    Technician = "Technician",
-    LabManager = 'LabManager'
+    Manager = "Manager",
+    Doctor = "Doctor",
+    Nurse = "Nurse",
 }
 
 //interface for User based on Role
