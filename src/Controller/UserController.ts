@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 import { User } from '../Model/UserModel';
 import { LoginHistory } from "../Model/LoginHistoryModel";
-import { IUser, ILoginHistory } from '../types';
+import { IUser, ILoginHistory, IEmailData } from '../types';
 import { encryptPassword, comparePassword } from '../helper/encryptDecrypt';
 import { generateToken } from '../middleware/authendicate';
+import { sendUserEmail } from '../helper/sendGridMail';
 
 // add user
 export const addUser = async (req: Request, res: Response) => {
@@ -30,9 +31,14 @@ export const addUser = async (req: Request, res: Response) => {
                     password: hashPassword,
                     role: role
                 });
-
+                let mailData: IEmailData = {
+                    email: email, 
+                    username: username, 
+                    password: password, 
+                }
                 let saveUser = await User.create(newObj);
                 if (saveUser) {
+                    sendUserEmail(mailData);
                     res.status(201).json({ status: true, message: "Successfully Added User" });
                 } else {
                     res.status(500).json({ status: false, message: "User Not Added Successfully" });

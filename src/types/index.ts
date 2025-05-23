@@ -84,3 +84,10 @@ export interface ILoginHistory extends Document {
     userAgent: string;
     cretedAt: Date;
 }
+
+// Sendgrid Mail content interface 
+export interface IEmailData {
+  email: string;
+  username: string;
+  password: string;
+}
