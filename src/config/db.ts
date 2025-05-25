@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const MONGO_URI: string = process.env.MONGODB_URI as string;
+const MONGO_URI: string = process.env.MONGODB_URI || "mongodb://localhost:27017/Course";
 
 export const connectDB = async (): Promise <typeof mongoose | void> => {
     try {  
