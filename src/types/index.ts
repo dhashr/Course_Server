@@ -8,7 +8,10 @@ export enum UserRole {
     Pathologist = "Pathologist",
     Technician = "Technician",
     LabManager = 'LabManager',
-    HR = 'HR'
+    HR = 'HR',
+    Manager = "Manager",
+    Doctor = "Doctor",
+    Nurse = "Nurse",
 }
 
 //interface for User based on Role
@@ -85,4 +88,11 @@ export interface ILoginHistory extends Document {
     location?: string;
     userAgent: string;
     cretedAt: Date;
+}
+
+// Sendgrid Mail content interface 
+export interface IEmailData {
+  email: string;
+  username: string;
+  password: string;
 }

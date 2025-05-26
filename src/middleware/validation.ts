@@ -6,7 +6,7 @@ export const validateUserInput = [
     body('username').trim().escape().notEmpty().withMessage('Username is required'),
     body('email').normalizeEmail().isEmail().withMessage('Invalid email format'),
     body('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters long'),
-    body('role').optional().isIn(['Admin', 'Receptionist', 'Pathologist', 'Technician', 'LabManager']).withMessage('Invalid admin role'),
+    body('role').optional().isIn(['Admin']).withMessage('Invalid admin role'),
     (req: Request, res: Response, next: NextFunction) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -51,11 +51,11 @@ export const ReportValidation = [
     body('pathologistId').isString().notEmpty().withMessage("Pathologist ID is required"),
     body('patientId').isString().notEmpty().withMessage("Patient ID is required"),
     body('diagnosis').isString().notEmpty().withMessage("Diagnosis result is required"),
-    body('reportDate').isDate().notEmpty().withMessage("Reporte Date is required"),    
+    body('reportDate').isDate().notEmpty().withMessage("Reporte Date is required"),
     body('signed').isBoolean().notEmpty().withMessage("Signed is required"),
     (req: Request, res: Response, next: NextFunction) => {
         const errors = validationResult(req);
-        if(!errors.isEmpty()){
+        if (!errors.isEmpty()) {
             const formattedErrors = errors.array().reduce((acc: Record<string, string>, error: Record<string, string>) => {
                 acc[error.path] = error.msg;
                 return acc;
@@ -101,13 +101,13 @@ export const validateTest = [
         .if(body("type").equals("update"))
         .notEmpty().withMessage("testName is required"),
 
-     body("page")
+    body("page")
         .if(body("type").isIn("update"))
         .notEmpty().withMessage("page is required"),
 
     body("limit")
         .if(body("type").equals("get"))
-        .notEmpty().withMessage("limit is required")    
+        .notEmpty().withMessage("limit is required")
 ];
 
 //Validation for Patient
@@ -138,7 +138,7 @@ export const validatePatient = [
 
     body("limit")
         .if(body("type").equals("get"))
-        .notEmpty().withMessage("limit is required")    
+        .notEmpty().withMessage("limit is required")
 ];
 
 export const addCourseValidation = [

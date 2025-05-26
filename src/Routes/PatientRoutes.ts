@@ -11,7 +11,7 @@ import { validatePatient } from '../middleware/validation';
 router.post(
     '/patient',
     authenticate,
-    checkRole([UserRole.Receptionist]),
+    // checkRole([UserRole.Receptionist]),
     validatePatient,
     PatientCrud
 );
