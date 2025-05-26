@@ -32,10 +32,6 @@ connectDB().then(() => {
     console.log(`Server is not running ${error}`);
 })
 
-<<<<<<< HEAD
-app.get('/', (_req: Request, res: Response): void => {
-    res.status(200).send('Server is running');  
-=======
 // mongoose.connect(MONGO_URI!)
 //     .then(() => {
 //         console.log('MongoDB connected successfully');
@@ -49,5 +45,4 @@ app.get('/', (_req: Request, res: Response): void => {
 
 app.get('/', (req: Request, res: Response): void => {
     res.status(200).send('Server is running');
->>>>>>> c021dc9f8e24044e5b6fd8e741c21631df2fc34d
 });
