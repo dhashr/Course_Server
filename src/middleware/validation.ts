@@ -141,3 +141,24 @@ export const validatePatient = [
         .notEmpty().withMessage("limit is required")    
 ];
 
+export const addCourseValidation = [
+    body('title').trim().escape().notEmpty().withMessage('Title is required'),
+    body('description').trim().escape().notEmpty().withMessage('Description is required'),
+    body('coursepdf').trim().escape().notEmpty().withMessage('CoursePdf is required'),
+    body('recurring').optional().isIn(['weekly', 'monthly', 'yearly']).withMessage('Invalid Recurring'),
+    (req: Request, res: Response, next: NextFunction) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            const formattedErrors = errors.array().reduce((acc: Record<string, string>, error: Record<string, string>) => {
+                acc[error.path] = error.msg;
+                return acc;
+            }, {});
+            return res.status(400).json({
+                status: 400,
+                message: 'Validation failed',
+                errors: formattedErrors,
+            });
+        }
+        next();
+    },
+];

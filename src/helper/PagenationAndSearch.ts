@@ -21,7 +21,7 @@ export const paginationAndSearch = async ({
         };
     }
     const [data, total] = await Promise.all([
-        model.find(searchQuery).skip(skip).limit(limit),
+        (await model.find(searchQuery).sort({_id:-1}).skip(skip).limit(limit)),
         model.countDocuments(searchQuery)
     ]);
     let totalpage = Math.ceil(total / limit);

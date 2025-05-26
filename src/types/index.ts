@@ -7,7 +7,8 @@ export enum UserRole {
     Receptionist = "Receptionist",
     Pathologist = "Pathologist",
     Technician = "Technician",
-    LabManager = 'LabManager'
+    LabManager = 'LabManager',
+    HR = 'HR'
 }
 
 //interface for User based on Role
